@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>珠海富强强科技有限公司</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@600;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @media print {
+    body { background: #0a1628; padding: 0; }
+    .poster { box-shadow: none; border-radius: 0; padding: 48px 56px; }
+    .download-btn { display: none; }
+    .core-product { page-break-after: always; }
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    background: #0f0f14;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+  }
+
+  .poster {
+    width: 900px;
+    background: linear-gradient(160deg, #0a1628 0%, #0d1f3c 30%, #0a1628 100%);
+    border-radius: 24px;
+    padding: 64px 56px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+  }
+
+  .poster::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(56,152,236,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .poster::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .company-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #a8d4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .company-name img {
+    width: 96px;
+    height: 96px;
+  }
+
+  .tagline {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    line-height: 1.8;
+  }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #3898ec, #6366f1);
+    margin: 28px auto 24px;
+    border-radius: 1px;
+  }
+
+  .hero {
+    text-align: left;
+    margin-bottom: 48px;
+    padding: 32px 36px;
+    background: linear-gradient(135deg, rgba(56,152,236,0.06) 0%, rgba(99,102,241,0.04) 100%);
+    border-left: 3px solid #3898ec;
+    border-radius: 0 12px 12px 0;
+  }
+
+  .hero-intro {
+    margin-bottom: 0;
+  }
+
+  .hero-intro-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #a8d4ff;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  .hero-intro-text {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    line-height: 2;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-summary {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.9;
+    letter-spacing: 0.5px;
+  }
+
+  .core-product {
+    background: linear-gradient(135deg, rgba(56,152,236,0.08) 0%, rgba(99,102,241,0.05) 100%);
+    border: 1px solid rgba(56,152,236,0.15);
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 36px;
+    position: relative;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: linear-gradient(180deg, #3898ec, #6366f1);
+    border-radius: 2px;
+  }
+
+  .product-item {
+    margin-bottom: 14px;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .product-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    background: #3898ec;
+    border-radius: 50%;
+  }
+
+  .product-label {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #a8d4ff;
+    margin-bottom: 4px;
+  }
+
+  .product-desc {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13.5px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 28px 28px;
+    transition: border-color 0.3s;
+  }
+
+  .card:hover {
+    border-color: rgba(56,152,236,0.2);
+  }
+
+  .card-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title .icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .card-title .icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-text {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13.5px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+  }
+
+  .highlight-number {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 700;
+    color: #3898ec;
+    font-size: 15px;
+  }
+
+  .card-slogan {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+  }
+
+  .advantages {
+    margin-bottom: 36px;
+  }
+
+  .adv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .adv-item {
+    text-align: center;
+    padding: 24px 16px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+  }
+
+  .adv-icon {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .adv-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .adv-label {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .adv-desc {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+
+  .footer {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .coop-title {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .coop-text {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+
+  .contact {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .contact-item {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.3px;
+  }
+
+  .qr-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .qr-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    object-fit: cover;
+  }
+
+  .qr-label {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.5px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(56,152,236,0.12), rgba(99,102,241,0.08));
+    border: 1px solid rgba(56,152,236,0.2);
+    color: rgba(255,255,255,0.75);
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 14px 24px;
+    border-radius: 10px;
+    margin-top: 20px;
+    letter-spacing: 0.3px;
+    line-height: 1.8;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .clients {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .clients-section {
+    margin-bottom: 36px;
+    text-align: center;
+  }
+
+  .clients-label {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .clients-tags {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .client-tag {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 16px;
+    border-radius: 20px;
+  }
+  .download-btn {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+    z-index: 100;
+  }
+
+  .download-btn:hover {
+    background: rgba(56,152,236,0.15);
+    border-color: rgba(56,152,236,0.4);
+    color: #fff;
+  }
+
+  .download-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .download-btn.loading {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<button class="download-btn" onclick="downloadPDF(this)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+  下载 PDF
+</button>
+
+<div class="poster">
+  <!-- Header -->
+  <div class="header">
+    <h1 class="company-name"><img src="logo.svg" alt="logo">珠海富强强科技有限公司</h1>
+    <p class="tagline">专注于企业AI应用落地，提供AI落地套件+咨询一站式服务</p>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-intro">
+      <div class="hero-intro-title">公司简介</div>
+      <p class="hero-intro-text">珠海富强强科技有限公司是一家专注于企业AI应用落地的技术服务商，致力于降低AI在企业场景中的实施门槛。公司以自研的「企业AI快速落地套件」为核心产品，配合专业咨询服务，为制造、零售、金融、互联网等行业客户提供从场景规划、技术选型到系统交付的一站式解决方案，帮助企业以更短周期、更低成本实现AI能力的规模化应用。</p>
+    </div>
+  </div>
+
+  <!-- Core Product -->
+  <div class="core-product">
+    <div class="section-title">核心产品：企业AI快速落地套件</div>
+    <div class="product-item">
+      <div class="product-label">后台管理系统</div>
+      <div class="product-desc">模型调度、权限管控、数据统计、API计费、私有化部署</div>
+    </div>
+    <div class="product-item">
+      <div class="product-label">前端控制台（小程序 / Web）</div>
+      <div class="product-desc">业务人员直接使用，支持对话、知识库检索、文档处理、报告生成</div>
+    </div>
+    <div class="product-item">
+      <div class="product-label">适配层</div>
+      <div class="product-desc">预置数据清洗流水线和行业插件，支持主流大模型（含DeepSeek）一键切换</div>
+    </div>
+  </div>
+
+  <!-- Problem & Speed -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3898ec" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>解决什么问题</div>
+      <div class="card-text">
+        企业AI落地周期长、缺人才、工程化难度大。<br><br>
+        套件让交付周期从数月缩短到<span class="highlight-number"> 2-4周</span>，
+        POC最快<span class="highlight-number"> 3天</span>。
+      </div>
+      <div class="card-slogan">让企业AI落地不再难——开箱即用的产品、经过验证的方法论、从规划到上线的全程陪跑。</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3898ec" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="M8 3h8"/></svg></span>谁在用</div>
+      <div class="card-text">
+        制造、零售、金融、互联网等行业的<br>IT部门和业务线。
+        <div style="margin-top:16px;">
+          <div class="clients-tags" style="justify-content:flex-start;">
+            <span class="client-tag">制造</span>
+            <span class="client-tag">零售</span>
+            <span class="client-tag">金融</span>
+            <span class="client-tag">互联网</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advantages -->
+  <div class="advantages">
+    <div class="section-title">核心优势</div>
+    <div class="adv-grid">
+      <div class="adv-item">
+        <span class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3898ec" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>
+        <div class="adv-label">开箱即用</div>
+        <div class="adv-desc">已有标准化产品<br>非定制项目</div>
+      </div>
+      <div class="adv-item">
+        <span class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3898ec" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17a5 5 0 0 0 10 0c0-2.76-2.24-5-5-5s-5 2.24-5 5Z"/><path d="M12 17a5 5 0 0 0 10 0c0-2.76-2.24-5-5-5s-5 2.24-5 5Z"/><path d="M7 7a5 5 0 0 0 10 0c0-2.76-2.24-5-5-5S7 4.24 7 7Z"/><line x1="12" y1="7" x2="12" y2="12"/></svg></span>
+        <div class="adv-label">成本降低 30%-50%</div>
+        <div class="adv-desc">智能路由 + 缓存<br>大幅节省调用成本</div>
+      </div>
+      <div class="adv-item">
+        <span class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#3898ec" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
+        <div class="adv-label">配套咨询</div>
+        <div class="adv-desc">场景规划、模型选型<br>员工培训</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="coop-title">合 作 方 式</div>
+    <div class="coop-text">套件采购（SaaS 或 私有化）+ 按需咨询服务</div>
+    <div class="contact">
+      <span class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>18603546191</span>
+      <span class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>xiaomi@xingke888.com</span>
+    </div>
+    <div class="qr-section">
+      <img src="wechat-qr.png" alt="微信二维码" class="qr-img">
+      <div class="qr-label">微信扫码联系</div>
+    </div>
+  </div>
+</div>
+
+<script>
+async function downloadPDF(btn) {
+  btn.classList.add('loading');
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 生成中...';
+
+  try {
+    const poster = document.querySelector('.poster');
+    const canvas = await html2canvas(poster, {
+      scale: 2,
+      backgroundColor: '#0a1628',
+      useCORS: true,
+      allowTaint: true,
+      logging: false
+    });
+
+    const imgData = canvas.toDataURL('image/png');
+    const { jsPDF } = window.jspdf;
+
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+    const pdfWidth = imgWidth * 0.264583;
+    const pdfHeight = imgHeight * 0.264583;
+
+    const pdf = new jsPDF({
+      orientation: pdfWidth > pdfHeight ? 'landscape' : 'portrait',
+      unit: 'mm',
+      format: [pdfWidth, pdfHeight]
+    });
+
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('珠海富强强科技-企业AI落地套件.pdf');
+  } catch (e) {
+    // fallback: use browser print to PDF
+    alert('自动导出失败，将打开打印对话框，请选择"另存为PDF"');
+    window.print();
+    console.error(e);
+  }
+
+  btn.classList.remove('loading');
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 下载 PDF';
+}
+</script>
+
+</body>
+</html>
