@@ -648,8 +648,7 @@
     }
   }
 
-  @media (max-width: 400px) {
-    .company-name {
+  @media (max-width: 400px) {    .company-name {
       font-size: 20px;
       gap: 8px;
     }
@@ -665,6 +664,66 @@
 
     .poster {
       padding: 24px 16px;
+    }
+  }
+
+  .resources-bar {
+    width: 900px;
+    margin: 24px auto 40px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 24px 32px;
+  }
+
+  .resources-title {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .resources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .resource-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: rgba(56,152,236,0.05);
+    border: 1px solid rgba(56,152,236,0.12);
+    transition: all 0.2s;
+  }
+
+  .resource-link:hover {
+    background: rgba(56,152,236,0.12);
+    border-color: rgba(56,152,236,0.3);
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .resources-bar {
+      width: 100%;
+      margin: 16px 0 24px;
+      padding: 18px 20px;
+    }
+    .resource-link {
+      font-size: 13px;
     }
   }
 </style>
@@ -782,6 +841,23 @@
   </div>
 </div>
 
+<div class="resources-bar">
+  <div class="resources-title">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;flex-shrink:0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    资料下载
+  </div>
+  <div class="resources-list">
+    <a class="resource-link" href="AI%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8%E8%B6%85%E7%BA%A7%E5%BC%95%E6%B5%81%E5%AE%9E%E6%88%98%E8%AF%BE-A4%E5%8D%95%E9%A1%B5%E7%89%88.pdf" download="AI一人公司超级引流实战课-A4单页版.pdf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;flex-shrink:0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      AI一人公司超级引流实战课（A4 单页版）
+    </a>
+    <a class="resource-link" href="AI%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8%E8%B6%85%E7%BA%A7%E5%BC%95%E6%B5%81%E5%AE%9E%E6%88%98%E8%AF%BE-A4%E4%B8%A4%E9%A1%B5-%E5%8F%8C%E9%9D%A2%E6%89%93%E5%8D%B0.pdf" download="AI一人公司超级引流实战课-A4两页-双面打印.pdf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;flex-shrink:0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      AI一人公司超级引流实战课（A4 两页·双面打印）
+    </a>
+  </div>
+</div>
+
 <script>
 async function downloadPDF(btn) {
   btn.classList.add('loading');
@@ -815,7 +891,7 @@ async function downloadPDF(btn) {
     });
 
     pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-    pdf.save('珠海富强强科技-企业AI落地套件.pdf');
+    pdf.save('zhuhai-fuqiangqiang-tech-ai-solutions.pdf');
   } catch (e) {
     // fallback: use browser print to PDF
     alert('自动导出失败，将打开打印对话框，请选择"另存为PDF"');
