@@ -16,6 +16,7 @@
     .poster { box-shadow: none; border-radius: 0; padding: 48px 56px; }
     .poster::before, .poster::after { display: none; }
     .download-btn { display: none; }
+    .download-group { display: none; }
     .core-product { page-break-after: always; }
   }
 
@@ -460,25 +461,31 @@
     padding: 6px 16px;
     border-radius: 20px;
   }
-  .download-btn {
+  .download-group {
     position: fixed;
     top: 24px;
     right: 24px;
     display: flex;
-    align-items: center;
     gap: 8px;
+    z-index: 100;
+  }
+
+  .download-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.15);
     color: rgba(255,255,255,0.8);
     font-family: 'Noto Sans SC', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 8px;
     cursor: pointer;
     backdrop-filter: blur(10px);
     transition: all 0.2s;
-    z-index: 100;
+    text-decoration: none;
   }
 
   .download-btn:hover {
@@ -620,11 +627,15 @@
       height: 100px;
     }
 
-    .download-btn {
+    .download-group {
       top: 12px;
       right: 12px;
+      gap: 6px;
+    }
+
+    .download-btn {
       font-size: 12px;
-      padding: 8px 14px;
+      padding: 7px 10px;
     }
 
     .clients-tags {
@@ -660,10 +671,20 @@
 </head>
 <body>
 
-<button class="download-btn" onclick="downloadPDF(this)">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-  下载 PDF
-</button>
+<div class="download-group">
+  <button class="download-btn" onclick="downloadPDF(this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    下载 PDF
+  </button>
+  <a class="download-btn" href="logo.svg" download="珠海富强强科技-logo.svg">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Logo SVG
+  </a>
+  <a class="download-btn" href="logo.png" download="珠海富强强科技-logo.png">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Logo PNG
+  </a>
+</div>
 
 <div class="poster">
   <!-- Header -->
